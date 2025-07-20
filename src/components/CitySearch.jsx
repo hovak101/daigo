@@ -130,11 +130,14 @@ const CitySearch = ({ nearbyLocations, inputValue, onInputChange, isTyping, onFo
               onInputChange(e.target.value);
             }}
             placeholder=""
-            className="w-full px-6 py-4 text-lg bg-transparent placeholder-gray-400 focus:outline-none"
+            className="w-full px-6 py-4 text-lg bg-transparent placeholder-gray-400 focus:outline-none pr-14"
           />
-          <div className="absolute right-6 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
-            <img src={searchIcon} className="w-6 h-6" />
-          </div>
+          <button
+            onClick={() => console.log(inputValue)}
+            className="absolute top-0 right-0 h-full w-14 flex items-center justify-center hover:bg-gray-100 focus:bg-gray-100 focus:outline-none cursor-pointer"
+          >
+            <img src={searchIcon} className="w-6 h-6 text-gray-400" />
+          </button>
         </motion.div>
         <AnimatePresence>
           {isFocused && (
