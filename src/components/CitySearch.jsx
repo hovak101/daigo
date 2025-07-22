@@ -21,7 +21,7 @@ const AnimatedListItem = ({ location, onSelect }) => {
 };
 
 const CitySearch = ({ nearbyLocations, inputValue, onInputChange, isTyping, onFocusChange, isFocused }) => {
-  const maxBorderRadius = "60px";
+  const maxBorderRadius = "32px";
   const focusedBorderRadius = "32px";
   
   const cities = ["San Francisco", "Los Angeles", "New York"];
