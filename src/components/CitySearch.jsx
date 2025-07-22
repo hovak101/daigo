@@ -21,8 +21,8 @@ const AnimatedListItem = ({ location, onSelect }) => {
 };
 
 const CitySearch = ({ nearbyLocations, inputValue, onInputChange, isTyping, onFocusChange, isFocused }) => {
-  const maxBorderRadius = "32px";
-  const focusedBorderRadius = "32px";
+  const maxBorderRadius = "60px";
+  const focusedBorderRadius = "15px";
   
   const cities = ["San Francisco", "Los Angeles", "New York"];
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
@@ -109,7 +109,10 @@ const CitySearch = ({ nearbyLocations, inputValue, onInputChange, isTyping, onFo
         }}
         className="relative w-full max-w-2xl bg-white border-2 border-gray-200 shadow-lg overflow-hidden"
         transition={{ 
-          borderRadius: { duration: 0.4, ease: "easeInOut" }
+          borderRadius: { 
+            duration: 0.4, 
+            ease: [0.4, 0, 0.6, 1] // Slow start, fast middle, slow end (upside-down parabola)
+          }
         }}
       >
         <motion.div layout="position" className="relative w-full">
