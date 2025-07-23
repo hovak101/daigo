@@ -3,7 +3,7 @@ import React from 'react';
 const CitySearchListItem = ({ city, dist, onSelect }) => {
   return (
     <button
-      onClick={() => onSelect(city)}
+      onClick={onSelect}
       className="flex items-center justify-between w-full px-6 py-3 text-left hover:bg-gray-100 focus:outline-none"
     >
       <div className="flex items-center">

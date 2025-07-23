@@ -20,7 +20,7 @@ const DATA = [
     }
 ]
 
-const LandingPage = () => {
+const CitySelector = ({ onNext }) => {
   const [inputValue, setInputValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [popoutStyles, setPopoutStyles] = useState({});
@@ -28,8 +28,7 @@ const LandingPage = () => {
   const searchContainerRef = useRef(null);
   const wasActiveRef = useRef(false);
 
-  const isTyping = !!inputValue;
-  const isActive = isTyping || isFocused;
+  const isActive = !!inputValue || isFocused;
 
   useLayoutEffect(() => {
     const wasActive = wasActiveRef.current;
@@ -74,10 +73,10 @@ const LandingPage = () => {
         >
           <div style={popoutStyles}>
             <CitySearch
+              onNext={onNext}
               nearbyLocations={DATA}
               inputValue={inputValue}
               onInputChange={handleInputChange}
-              isTyping={isTyping}
               onFocusChange={handleFocusChange}
               isFocused={isFocused}
             />
@@ -88,4 +87,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default CitySelector;

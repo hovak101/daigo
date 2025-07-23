@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import searchIcon from '../assets/svgs/search.svg';
 import CitySearchListItem from './CitySearchListItem';
 
-const AnimatedListItem = ({ location, onSelect }) => {
+const AnimatedListItem = ({ location, onNext }) => {
   return (
     <motion.div
       layout="position"
@@ -14,16 +14,32 @@ const AnimatedListItem = ({ location, onSelect }) => {
       <CitySearchListItem
         city={location.city}
         dist={location.dist}
-        onSelect={() => onSelect(location.city)}
+        onSelect={onNext}
       />
     </motion.div>
   );
 };
 
-const CitySearch = ({ nearbyLocations, inputValue, onInputChange, isTyping, onFocusChange, isFocused }) => {
+const CitySearch = ({ nearbyLocations, inputValue, onInputChange, onNext, onFocusChange, isFocused }) => {
   const maxBorderRadius = "60px";
   const focusedBorderRadius = "15px";
   
+  const borderVariants = {
+    focused: {
+      borderRadius: focusedBorderRadius,
+      transition: {
+        duration: 0.15,
+      },
+    },
+    blurred: {
+      borderRadius: maxBorderRadius,
+      transition: {
+        duration: 0.15,
+        delay: 0.25,
+      },
+    },
+  };
+
   const cities = ["San Francisco", "Los Angeles", "New York"];
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
@@ -93,27 +109,13 @@ const CitySearch = ({ nearbyLocations, inputValue, onInputChange, isTyping, onFo
     }, 100);
   };
 
-  const handleSelectCity = (city) => {
-    onInputChange(city);
-    onFocusChange(false);
-  };
-
   return (
     <div ref={containerRef} className="flex justify-center items-center w-full">
       <motion.div
-        initial={{ 
-          borderRadius: maxBorderRadius
-        }}
-        animate={{ 
-          borderRadius: isFocused ? focusedBorderRadius : maxBorderRadius
-        }}
+        variants={borderVariants}
+        initial="blurred"
+        animate={isFocused ? 'focused' : 'blurred'}
         className="relative w-full max-w-2xl bg-white border-2 border-gray-200 shadow-lg overflow-hidden"
-        transition={{ 
-          borderRadius: { 
-            duration: 0.4, 
-            ease: [0.4, 0, 0.6, 1] // Slow start, fast middle, slow end (upside-down parabola)
-          }
-        }}
       >
         <motion.div layout="position" className="relative w-full">
           {/* Custom placeholder with blinking cursor */}
@@ -136,7 +138,7 @@ const CitySearch = ({ nearbyLocations, inputValue, onInputChange, isTyping, onFo
             className="w-full px-6 py-4 text-lg bg-transparent placeholder-gray-400 focus:outline-none pr-14"
           />
           <button
-            onClick={() => console.log(inputValue)}
+            onClick={onNext}
             className="absolute top-0 right-0 h-full w-14 flex items-center justify-center hover:bg-gray-100 focus:bg-gray-100 focus:outline-none cursor-pointer"
           >
             <img src={searchIcon} className="w-6 h-6 text-gray-400" />
@@ -160,7 +162,7 @@ const CitySearch = ({ nearbyLocations, inputValue, onInputChange, isTyping, onFo
                   <AnimatedListItem
                     key={location.id}
                     location={location}
-                    onSelect={handleSelectCity}
+                    onNext={onNext}
                   />
                 ))}
               </AnimatePresence>
