@@ -14,7 +14,7 @@ const AnimatedListItem = ({ location, onNext }) => {
       <CitySearchListItem
         city={location.city}
         dist={location.dist}
-        onSelect={onNext}
+        onSelect={() => onNext({ city: location.city })}
       />
     </motion.div>
   );
@@ -138,7 +138,7 @@ const CitySearch = ({ nearbyLocations, inputValue, onInputChange, onNext, onFocu
             className="w-full px-6 py-4 text-lg bg-transparent placeholder-gray-400 focus:outline-none pr-14"
           />
           <button
-            onClick={onNext}
+            onClick={() => inputValue && onNext({city: inputValue})}
             className="absolute top-0 right-0 h-full w-14 flex items-center justify-center hover:bg-gray-100 focus:bg-gray-100 focus:outline-none cursor-pointer"
           >
             <img src={searchIcon} className="w-6 h-6 text-gray-400" />
