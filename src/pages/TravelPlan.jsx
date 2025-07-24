@@ -15,7 +15,7 @@ const TravelPlanner = ({ onBack, data }) => {
   return (
     <div className="h-screen">
       <ResizablePanelGroup direction="horizontal">
-        <ResizablePanel className="bg-gray-400">One</ResizablePanel>
+        <ResizablePanel className="bg-white">One</ResizablePanel>
         <ResizableHandle />
         <ResizablePanel>Two</ResizablePanel>
       </ResizablePanelGroup>

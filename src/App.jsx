@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CitySelector from './pages/CitySelector';
 import CityInfoCollector from './pages/CityInfoCollector';
 import TravelPlanner from './pages/TravelPlan';
+import Loading from './pages/Loading';
 
 function App() {
   const [step, setStep] = useState(1);
@@ -10,6 +11,20 @@ function App() {
     budget: -1,
     time: -1,
   });
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (step === 3) {
+      setIsLoading(true);
+
+      
+      // const timer = setTimeout(() => {
+      //   setIsLoading(false); // After 3 seconds, hide loading screen
+      // }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
 
   useEffect(() => {
     console.log("Data updated:", data);
@@ -49,7 +64,9 @@ function App() {
       render = <CityInfoCollector onNext={handleNextStep} onBack={handleBackStep}/>;
       break;
     case 3:
-      render = <TravelPlanner onBack={handleBackStep} data={data}/>;
+      render = (step === 3 && isLoading)
+        ? <Loading/>
+        : <TravelPlanner onBack={handleBackStep} data={data}/>;
       break;
   }
 
