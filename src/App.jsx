@@ -49,7 +49,7 @@ function App() {
       render = <CityInfoCollector onNext={handleNextStep} onBack={handleBackStep}/>;
       break;
     case 3:
-      render = <TravelPlanner onBack={handleBackStep} />;
+      render = <TravelPlanner onBack={handleBackStep} data={data}/>;
       break;
   }
 
