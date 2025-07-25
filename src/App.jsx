@@ -18,9 +18,9 @@ function App() {
       setIsLoading(true);
 
       
-      // const timer = setTimeout(() => {
-      //   setIsLoading(false); // After 3 seconds, hide loading screen
-      // }, 3000);
+      const timer = setTimeout(() => {
+        setIsLoading(false); // After 3 seconds, hide loading screen
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
